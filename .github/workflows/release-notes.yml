@@ -22,7 +22,7 @@ jobs:
         run: |
           curl -s -H "Authorization: token $GH_TOKEN" \
             https://api.github.com/repos/${{ github.repository }}/pulls?state=all \
-          | jq '.[] | {title: .title, head: .head.ref, base: .base.ref, body: .body}'
+          | jq '.[] | "#\(.number): \(.title)\nFrom: \(.head.ref) → \(.base.ref)\n\(.body)\n---"'
 permissions:
   contents: read
   pull-requests: read
